@@ -52,7 +52,7 @@ class DashboardScreen : Screen {
             }
         }
 
-        LayoutWithBars(title = "Dashboard") { padding ->
+        LayoutWithBars(title = "Posts", onBackButtonClick = { navigator.pop()}) { padding ->
             if (isLoading) {
                 Box(
                     modifier = Modifier

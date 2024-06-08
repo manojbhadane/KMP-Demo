@@ -44,7 +44,7 @@ class LoginScreen : Screen {
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    navigator.push(DashboardScreen())
+                    navigator.push(LandingScreen())
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
