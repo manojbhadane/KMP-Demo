@@ -6,9 +6,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -47,6 +49,19 @@ class LoginScreen : Screen {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Login")
+            }
+            Spacer(modifier = Modifier.height(32.dp))
+            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text("Don't have an account?", fontSize = 14.sp)
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = {
+
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Sign up")
             }
         }
     }

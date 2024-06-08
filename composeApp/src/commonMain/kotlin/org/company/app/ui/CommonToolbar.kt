@@ -1,7 +1,5 @@
 package org.company.app.ui
 
-// CommonMain/src/commonMain/kotlin/com/example/components/CommonToolbar.kt
-
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack

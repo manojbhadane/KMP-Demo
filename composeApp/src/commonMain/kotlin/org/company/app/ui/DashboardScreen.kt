@@ -19,16 +19,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.launch
 import org.company.app.model.Post
 import org.company.app.repository.PostRepository
 import org.company.app.ui.common.LayoutWithBars
+import org.company.app.utils.capitalizeWords
 
 class DashboardScreen : Screen {
     private val dummyData = List(20) { "Item #${it + 1}" }
 
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
 
         val postRepository = remember { PostRepository() }
         var posts by remember { mutableStateOf<List<Post>>(emptyList()) }
@@ -52,8 +56,7 @@ class DashboardScreen : Screen {
             if (isLoading) {
                 Box(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
+                        .fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
@@ -62,13 +65,8 @@ class DashboardScreen : Screen {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(padding)
                 ) {
-                    item {
-                        Text(text = "BBB - " + posts.size)
-                    }
                     items(posts) { post ->
-                        Text(text = "AAA")
                         PostItem(post)
                         Divider()
                     }
