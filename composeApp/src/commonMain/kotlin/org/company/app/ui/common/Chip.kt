@@ -28,7 +28,7 @@ fun Chip(
         modifier = modifier
             .fillMaxWidth()
             .background(color = backgroundColor, shape = RoundedCornerShape(8.dp))
-            .padding(horizontal = 10.dp, vertical = 10.dp),
+            .padding(horizontal = 10.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
