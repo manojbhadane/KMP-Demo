@@ -7,6 +7,8 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.company.app.model.Post
+import org.company.app.utils.Cache
+import org.company.app.utils.Cache.CACHE_ITEM_POSTS
 import org.company.app.utils.capitalizeWords
 
 class PostRepository {
@@ -24,6 +26,11 @@ class PostRepository {
             throw Exception("No internet connection")
         }*/
 
+        val cachedPosts: List<Post>? = Cache.get(CACHE_ITEM_POSTS)
+        if (cachedPosts != null) {
+            return cachedPosts
+        }
+
         val posts: List<Post> = client.get("https://jsonplaceholder.typicode.com/posts")
             .body()
         val modifiedPosts = posts.map {
@@ -32,6 +39,7 @@ class PostRepository {
                 body = it.body.capitalizeWords()
             )
         }
+        Cache.put(CACHE_ITEM_POSTS, modifiedPosts)
         return modifiedPosts
     }
 }
