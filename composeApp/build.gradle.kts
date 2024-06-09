@@ -67,6 +67,8 @@ kotlin {
             implementation(libs.kstore)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.datastore.preferences)
+            implementation(libs.atomicfu)
         }
 
         commonTest.dependencies {

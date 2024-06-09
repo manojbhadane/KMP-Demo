@@ -23,16 +23,22 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.launch
+import org.company.app.data.local.DataStoreRepository
+import org.company.app.data.local.createDataStore
 import org.company.app.model.Post
 import org.company.app.repository.PostRepository
 import org.company.app.ui.common.Chip
 import org.company.app.ui.common.LayoutWithBars
 import org.company.app.utils.capitalizeWords
 
-class LandingScreen : Screen {
+class LandingScreen(val context: Any? = null) : Screen {
 
     @Composable
     override fun Content() {
+        val scope = rememberCoroutineScope()
+        val dataStoreRepository = remember {
+            DataStoreRepository(dataStore = createDataStore(context = context))
+        }
         val navigator = LocalNavigator.currentOrThrow
 
         LayoutWithBars(title = "Hi, Manoj") { padding ->
@@ -47,6 +53,14 @@ class LandingScreen : Screen {
                 Chip(name = "Jobs", modifier = Modifier.padding(bottom = 12.dp))
                 Chip(name = "Profile", modifier = Modifier.padding(bottom = 12.dp))
                 Chip(name = "Settings", modifier = Modifier.padding(bottom = 12.dp))
+                Chip(name = "Logout", modifier = Modifier.padding(bottom = 12.dp).clickable {
+                    navigator.push(DashboardScreen())
+                    scope.launch {
+                        dataStoreRepository.saveIsLoggedIn(
+                            isLoggedIn = false
+                        )
+                    }
+                })
             }
         }
     }

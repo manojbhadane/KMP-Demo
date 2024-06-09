@@ -11,8 +11,8 @@ import org.company.app.ui.LoginScreen
 
 
 @Composable
-internal fun App() = AppTheme {
-    Navigator(LoginScreen())
+internal fun App(context : Any? = null) = AppTheme {
+    Navigator(LoginScreen(context = context))
     /*Navigator(LoginScreen) { navigator ->
         CompositionLocalProvider(LocalNavigator provides navigator) {
 
@@ -65,7 +65,7 @@ internal fun App() = AppTheme {
             }
         )
 
-        var isDark by LocalThemeIsDark.current
+        var is  Dark by LocalThemeIsDark.current
         val icon = remember(isDark) {
             if (isDark) Res.drawable.ic_light_mode
             else Res.drawable.ic_dark_mode
