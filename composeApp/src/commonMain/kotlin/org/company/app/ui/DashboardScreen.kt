@@ -25,10 +25,10 @@ import kotlinx.coroutines.launch
 import org.company.app.model.Post
 import org.company.app.repository.PostRepository
 import org.company.app.ui.common.LayoutWithBars
+import org.company.app.ui.common.Tag
 import org.company.app.utils.capitalizeWords
 
 class DashboardScreen : Screen {
-    private val dummyData = List(20) { "Item #${it + 1}" }
 
     @Composable
     override fun Content() {
@@ -73,24 +73,9 @@ class DashboardScreen : Screen {
                 }
             }
         }
-
-        /*Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-            CommonToolbar(title = "Dashboard")
-            Spacer(modifier = Modifier.height(16.dp))
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(dummyData) { item ->
-                    Text(
-                        text = item,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                    )
-                    Divider()
-                }
-            }
-        }*/
     }
 
+    @OptIn(ExperimentalLayoutApi::class)
     @Composable
     fun PostItem(post: Post) {
         Column(
@@ -101,6 +86,13 @@ class DashboardScreen : Screen {
             Text(text = post.title, style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = post.body, style = MaterialTheme.typography.bodySmall)
+            Spacer(modifier = Modifier.height(4.dp))
+            FlowRow {
+                post.tags.forEach { tag ->
+                    Tag(tag.capitalizeWords())
+                    Spacer(modifier = Modifier.width(2.dp))
+                }
+            }
         }
     }
 
